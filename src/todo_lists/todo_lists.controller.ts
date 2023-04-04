@@ -12,7 +12,7 @@ import { UpdateTodoListDto } from './dtos/update-todo_list';
 import { TodoList } from '../interfaces/todo_list.interface';
 import { TodoListsService } from './todo_lists.service';
 
-@Controller('api/todo_lists')
+@Controller('api/todolists')
 export class TodoListsController {
   constructor(private todoListsService: TodoListsService) {}
 
