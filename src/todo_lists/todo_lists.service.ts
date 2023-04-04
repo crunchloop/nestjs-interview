@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTodoListDto } from './dtos/create-todo_list';
 import { UpdateTodoListDto } from './dtos/update-todo_list';
-import { TodoList } from './interfaces/todo_list.interface';
+import { TodoList } from '../interfaces/todo_list.interface';
 
 @Injectable()
 export class TodoListsService {
-  private readonly todolists: TodoList[] = [];
+  private readonly todolists: TodoList[];
+
+  constructor(todoLists: TodoList[] = []) {
+    this.todolists = todoLists;
+  }
 
   all(): TodoList[] {
     return this.todolists;
@@ -27,12 +31,10 @@ export class TodoListsService {
   }
 
   update(id: number, dto: UpdateTodoListDto): TodoList {
-    let todolist = this.todolists.find((x) => x.id == Number(id));
+    const todolist = this.todolists.find((x) => x.id == Number(id));
 
-    todolist = {
-      ...todolist,
-      ...dto,
-    };
+    // Update the record
+    todolist.name = dto.name;
 
     return todolist;
   }
