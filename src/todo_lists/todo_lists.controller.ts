@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { CreateTodoListDto } from './dtos/create-todo_list';
 import { UpdateTodoListDto } from './dtos/update-todo_list';
-import { TodoList } from './interfaces/todo_list.interface';
+import { TodoList } from '../interfaces/todo_list.interface';
 import { TodoListsService } from './todo_lists.service';
 
-@Controller('todolists')
+@Controller('api/todo_lists')
 export class TodoListsController {
   constructor(private todoListsService: TodoListsService) {}
 
@@ -28,7 +28,6 @@ export class TodoListsController {
 
   @Post()
   create(@Body() dto: CreateTodoListDto): TodoList {
-    console.log(dto);
     return this.todoListsService.create(dto);
   }
 
