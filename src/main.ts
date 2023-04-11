@@ -1,9 +1,9 @@
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
-import { TodoListsModule } from './todo_lists/todo_lists.module';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(TodoListsModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   await app.listen(3000);
 }
