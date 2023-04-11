@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { TodoListsModule } from '../src/todo_lists.module';
+import { TodoListsModule } from 'src/todo_lists/todo_lists.module';
 
 describe('TodoListsController (e2e)', () => {
   let app: INestApplication;
