@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "934c0731-e63e-4e11-b04f-5a730c4aa742",
+		"name": "TodoList API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "144124"
+	},
+	"item": [
+		{
+			"name": "Create TodoList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"todo_list_id\", jsonData['id']);",
+							"",
+							"pm.test(\"Response has ID\", function () {",
+							"    pm.expect(jsonData).to.have.property('id');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Example List\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All TodoLists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create TodoListItem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"todo_list_item_id\", jsonData['id']);",
+							"",
+							"pm.test(\"Response has ID\", function () {",
+							"    pm.expect(jsonData).to.have.property('id');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"description\": \"Item Description\", \"completed\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}/:todo_list_id/{{todo_list_item_resource_name}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}",
+						":todo_list_id",
+						"{{todo_list_item_resource_name}}"
+					],
+					"variable": [
+						{
+							"id": 0,
+							"key": "todo_list_id",
+							"value": "{{todo_list_id}}",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All TodoListItems for a TodoList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}/:todo_list_id/{{todo_list_item_resource_name}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}",
+						":todo_list_id",
+						"{{todo_list_item_resource_name}}"
+					],
+					"variable": [
+						{
+							"id": 0,
+							"key": "todo_list_id",
+							"value": "{{todo_list_id}}",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TodoListItem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Response has updated fields\", function () {",
+							"    pm.expect(jsonData.description).to.eql(\"Updated Description\");",
+							"    pm.expect(jsonData.completed).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"description\": \"Updated Description\", \"completed\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}/:todo_list_id/{{todo_list_item_resource_name}}/:todo_list_item_id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}",
+						":todo_list_id",
+						"{{todo_list_item_resource_name}}",
+						":todo_list_item_id"
+					],
+					"variable": [
+						{
+							"id": 0,
+							"key": "todo_list_id",
+							"value": "{{todo_list_id}}",
+							"type": "string"
+						},
+						{
+							"key": "todo_list_item_id",
+							"value": "{{todo_list_item_id}}",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete TodoListItem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204 or 200\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}/:todo_list_id/{{todo_list_item_resource_name}}/:todo_list_item_id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}",
+						":todo_list_id",
+						"{{todo_list_item_resource_name}}",
+						":todo_list_item_id"
+					],
+					"variable": [
+						{
+							"id": 0,
+							"key": "todo_list_id",
+							"value": "{{todo_list_id}}",
+							"type": "string"
+						},
+						{
+							"key": "todo_list_item_id",
+							"value": "{{todo_list_item_id}}",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TodoList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Response has updated name\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"Updated List Name\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Updated List Name\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}/:todo_list_id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}",
+						":todo_list_id"
+					],
+					"variable": [
+						{
+							"id": 0,
+							"key": "todo_list_id",
+							"value": "{{todo_list_id}}",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete TodoList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204 or 200\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{namespace}}/{{todo_list_resource_name}}/:todo_list_id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{todo_list_resource_name}}",
+						":todo_list_id"
+					],
+					"variable": [
+						{
+							"id": 0,
+							"key": "todo_list_id",
+							"value": "{{todo_list_id}}",
+							"type": "string"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:3000",
+			"type": "string"
+		},
+		{
+			"key": "namespace",
+			"value": "api",
+			"type": "string"
+		},
+		{
+			"key": "todo_list_resource_name",
+			"value": "todolists",
+			"type": "string"
+		},
+		{
+			"key": "todo_list_item_resource_name",
+			"value": "todos",
+			"type": "string"
+		},
+		{
+			"key": "todo_list_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "todo_list_item_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
