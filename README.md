@@ -36,6 +36,8 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+Check integration tests at: (https://github.com/crunchloop/interview-tests)
+
 ## Contact
 
 - Martín Fernández (mfernandez@crunchloop.io)
