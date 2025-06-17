@@ -8,5 +8,6 @@ import { TodoListsService } from './todo_lists.service';
   providers: [
     { provide: TodoListsService, useValue: new TodoListsService([]) },
   ],
+  exports: [TodoListsService],
 })
 export class TodoListsModule {}
