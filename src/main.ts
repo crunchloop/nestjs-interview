@@ -7,11 +7,13 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,           // Strip properties not in DTO
-    forbidNonWhitelisted: true, // Throw error for extra properties
-    transform: true,           // Transform payloads to DTO instances
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Strip properties not in DTO
+      forbidNonWhitelisted: true, // Throw error for extra properties
+      transform: true, // Transform payloads to DTO instances
+    }),
+  );
 
   // Swagger configuration
   const config = new DocumentBuilder()

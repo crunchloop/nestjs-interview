@@ -21,10 +21,11 @@ export class TodoItemsController {
   @Get()
   @ApiOperation({ summary: 'Get all todo items from a list' })
   @ApiParam({ name: 'listId', description: 'Todo list ID' })
-  @ApiResponse({ status: 200, description: 'Returns all todo items from the specified list' })
-  getItemsByListID(
-    @Param() param: { listId: number },
-  ): Promise<TodoItem[]> {
+  @ApiResponse({
+    status: 200,
+    description: 'Returns all todo items from the specified list',
+  })
+  getItemsByListID(@Param() param: { listId: number }): Promise<TodoItem[]> {
     return this.itemService.getItemsByListID(param.listId);
   }
 
@@ -34,19 +35,20 @@ export class TodoItemsController {
   @ApiParam({ name: 'itemId', description: 'Todo item ID' })
   @ApiResponse({ status: 200, description: 'Returns the todo item' })
   @ApiResponse({ status: 404, description: 'Todo item not found' })
-  get(
-    @Param() param: { listId: number; itemId: number },
-  ): Promise<TodoItem> {
+  get(@Param() param: { listId: number; itemId: number }): Promise<TodoItem> {
     return this.itemService.get(param.listId, param.itemId);
   }
-  
+
   @Post()
   @ApiOperation({ summary: 'Create a new todo item' })
   @ApiParam({ name: 'listId', description: 'Todo list ID' })
   @ApiResponse({ status: 201, description: 'Todo item created successfully' })
   @ApiResponse({ status: 400, description: 'Invalid input data' })
   @ApiResponse({ status: 404, description: 'Todo list not found' })
-  create(@Param() param: { listId: number }, @Body() dto: CreateTodoItemDto): Promise<TodoItem> {
+  create(
+    @Param() param: { listId: number },
+    @Body() dto: CreateTodoItemDto,
+  ): Promise<TodoItem> {
     return this.itemService.create(dto, param.listId);
   }
 
