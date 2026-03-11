@@ -1,0 +1,3 @@
+[submodule "react-interview"]
+	path = react-interview
+	url = git@github.com:crunchloop/react-interview.git

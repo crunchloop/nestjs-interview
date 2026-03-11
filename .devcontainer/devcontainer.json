@@ -24,7 +24,7 @@
 	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [3000, 5173],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
@@ -32,8 +32,8 @@
 	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
 	// "shutdownAction": "none",
 
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+	// Install dependencies after container is created
+	"postCreateCommand": "git submodule update --init --recursive && npm install && cd react-interview && npm install",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
