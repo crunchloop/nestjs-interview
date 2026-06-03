@@ -73,5 +73,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "allowScripts": {
+    "@nestjs/core@11.1.3": true,
+    "@swc/core@1.12.9": true
   }
 }
